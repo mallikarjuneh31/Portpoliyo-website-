@@ -8,6 +8,8 @@ A modern, responsive portfolio website built with React that showcases my skills
 - **Responsive Layout**: Works seamlessly on all device sizes
 - **Interactive Elements**: Smooth animations and hover effects
 - **Dark/Light Theme**: Toggle between color schemes with persistent preference
+- **Profile Photo**: Circular profile image with modern styling
+- **Resume Download**: Downloadable resume PDF in the hero section
 - **Visitor Counter**: Tracks unique visitors to the portfolio
 - **Project Showcase**: Dedicated section for featured projects
 - **Skills Display**: Organized presentation of technical abilities
@@ -26,12 +28,12 @@ A modern, responsive portfolio website built with React that showcases my skills
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Mallikarjun-9610/portfolio.git
+   git clone https://github.com/Mallikarjun-9610/portpoliyo.git
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd portfolio
+   cd portpoliyo
    ```
 
 3. Install dependencies:
@@ -51,6 +53,8 @@ A modern, responsive portfolio website built with React that showcases my skills
 You can easily customize this portfolio by modifying:
 
 - **Personal Information**: Update the content in `src/App.js`
+- **Profile Photo**: Replace `public/images/profile.jpg` with your photo
+- **Resume**: Replace `public/resume.pdf` with your resume PDF
 - **Colors**: Modify the CSS variables in `src/App.css`
 - **Projects**: Add or modify project entries in the Projects section
 - **Skills**: Update the skills list in the Skills section

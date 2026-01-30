@@ -160,9 +160,16 @@ function App() {
                   Computer Science Engineering student passionate about building interactive web applications and solving problems through code.
                 </p>
                 <div className="hero-actions">
-                  <button className="btn primary" onClick={() => scrollToSection('contact')}>
+                  <a 
+                    href={`${process.env.PUBLIC_URL || ''}/resume.pdf`}
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="btn primary"
+                    download="Mallikarjun_Resume.pdf"
+                    type="application/pdf"
+                  >
                     Resume
-                  </button>
+                  </a>
                   <button className="btn secondary" onClick={() => scrollToSection('projects')}>
                     View Work
                   </button>
