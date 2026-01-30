@@ -86,3 +86,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Inspired by modern portfolio designs
 - Built with React and love
 - Designed for fellow developers and students
+

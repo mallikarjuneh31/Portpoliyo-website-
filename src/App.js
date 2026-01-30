@@ -140,8 +140,14 @@ function App() {
             <div className="hero-content">
               <div className="hero-image">
                 <div className="profile-photo">
-                  <img src="portpoliyo.jpg.jpeg" alt="Mallikarjun" className="profile-img" />
-
+                  <img 
+                    src={`${process.env.PUBLIC_URL || ''}/images/profile.jpg`} 
+                    alt="Mallikarjun" 
+                    className="profile-img" 
+                    onError={(e) => {
+                      console.error('Image failed to load. Attempted path:', e.target.src);
+                    }}
+                  />
                 </div>
               </div>
               <div className="hero-text">
@@ -161,16 +167,15 @@ function App() {
                     View Work
                   </button>
                   <a
-  href="https://github.com/YOUR_USERNAME/YOUR_REPO"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="project-link"
->
-  GitHub
-</a>
-
+                    href="https://github.com/Mallikarjun-9610"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-link"
+                  >
+                    GitHub
+                  </a>
+                </div>
               </div>
-            </div>
             </div>
           </div>
         </section>
