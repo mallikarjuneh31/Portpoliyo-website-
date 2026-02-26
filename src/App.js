@@ -19,7 +19,10 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState(null);
 
-  const roles = ['Front End Developer', 'Cyber Security Enthusiast'];
+ useEffect(() => {
+   const roles = ["Frontend Developer", "React Developer", "MERN Developer"];
+   // logic here
+}, []);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'dark';
