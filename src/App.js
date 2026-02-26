@@ -13,17 +13,16 @@ function App() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
+    subject: '',  
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState(null);
 
- useEffect(() => {
-   const roles = ["Frontend Developer", "React Developer", "MERN Developer"];
-   // logic here
-}, []);
-
+const roles = useMemo(() => 
+  ["Frontend Developer", "React Developer", "MERN Developer"],
+  []
+);
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'dark';
     const savedColorScheme = localStorage.getItem('colorScheme') || 'color-scheme-1';
