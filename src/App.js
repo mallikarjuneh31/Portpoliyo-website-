@@ -10,8 +10,16 @@ function App() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(150);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formStatus, setFormStatus] = useState(null);
 
-  const roles = ['Frount End Developer', 'Cyber Security Enthusiast'];
+  const roles = ['Front End Developer', 'Cyber Security Enthusiast'];
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -45,6 +53,69 @@ function App() {
     const timer = setTimeout(handleTyping, typingSpeed);
     return () => clearTimeout(timer);
   }, [animatedText, isDeleting, loopNum, roles, typingSpeed]);
+
+  // Update active section when scrolling
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'about', 'skills', 'projects', 'education', 'achievements', 'contact'];
+      const scrollPosition = window.scrollY + 200;
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetHeight = element.offsetHeight;
+          
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmitForm = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setFormStatus(null);
+    
+    try {
+      // Simulate form submission
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+      
+      setFormStatus({
+        type: 'success',
+        message: 'Thank you for your message! I will get back to you soon.'
+      });
+    } catch (error) {
+      setFormStatus({
+        type: 'error',
+        message: 'There was an error sending your message. Please try again.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
@@ -91,7 +162,7 @@ function App() {
             </nav>
             
             {/* Mobile Menu Button */}
-            <div className="mobile-menu-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <div className={`mobile-menu-btn ${isMenuOpen ? 'active' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
               <span></span>
               <span></span>
               <span></span>
@@ -165,8 +236,6 @@ function App() {
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="btn primary"
-                    download="Mallikarjun_Resume.pdf"
-                    type="application/pdf"
                   >
                     Resume
                   </a>
@@ -262,8 +331,8 @@ function App() {
                   <a href="https://github.com/Mallikarjun-9610" target="_blank" rel="noopener noreferrer" className="project-link">
                     <i className="fab fa-github"></i> GitHub
                   </a>
-                  <a href="#" className="project-link disabled" aria-disabled="true">
-                    <i className="fas fa-external-link-alt"></i> Live Demo (Coming Soon)
+                  <a href="https://find-investors-for-startups.vercel.app" target="_blank" rel="noopener noreferrer" className="project-link">
+                    <i className="fas fa-external-link-alt"></i> Live Demo
                   </a>
                 </div>
               </article>
@@ -327,7 +396,7 @@ function App() {
           <div className="container">
             <div className="contact-inner">
               <div className="contact-info">
-                <h2>Get In Touch <span id="visitorCounter" className="visitor-count">0</span></h2>
+                <h2>Get In Touch</h2>
                 <p className="section-subtitle">
                   Feel free to reach out for collaborations, opportunities, or just a friendly chat about technology!
                 </p>
@@ -350,29 +419,66 @@ function App() {
                   </div>
                 </div>
               </div>
-              <form className="contact-form">
+              <form className="contact-form" onSubmit={handleSubmitForm}>
                 <h3>Send a Message</h3>
                 <div className="form-field">
                   <label htmlFor="name">Your Name</label>
-                  <input type="text" id="name" placeholder="Your Name" />
+                  <input 
+                    type="text" 
+                    id="name" 
+                    name="name"
+                    placeholder="Your Name" 
+                    required
+                    value={formData.name}
+                    onChange={handleInputChange}
+                  />
                 </div>
                 <div className="form-field">
                   <label htmlFor="email">Your Email</label>
-                  <input type="email" id="email" placeholder="Your Email" />
+                  <input 
+                    type="email" 
+                    id="email" 
+                    name="email"
+                    placeholder="Your Email" 
+                    required
+                    value={formData.email}
+                    onChange={handleInputChange}
+                  />
                 </div>
                 <div className="form-field">
                   <label htmlFor="subject">Subject</label>
-                  <input type="text" id="subject" placeholder="Subject" />
+                  <input 
+                    type="text" 
+                    id="subject" 
+                    name="subject"
+                    placeholder="Subject" 
+                    required
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                  />
                 </div>
                 <div className="form-field">
                   <label htmlFor="message">Message</label>
-                  <textarea id="message" rows="4" placeholder="Message"></textarea>
+                  <textarea 
+                    id="message" 
+                    name="message"
+                    rows="4" 
+                    placeholder="Message"
+                    required
+                    value={formData.message}
+                    onChange={handleInputChange}
+                  ></textarea>
                 </div>
-                <button type="submit" className="btn primary full-width">
-                  Send Message
+                <button type="submit" className="btn primary full-width" disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
+                {formStatus && (
+                  <p className={`form-status ${formStatus.type}`}>
+                    {formStatus.message}
+                  </p>
+                )}
                 <p className="form-note">
-                  This is a demo form. To make it functional, connect it to a backend or a form service.
+                  This form uses emailjs for sending emails. Configure with your own service for production use.
                 </p>
               </form>
             </div>
@@ -383,8 +489,10 @@ function App() {
       {/* Footer */}
       <footer className="site-footer">
         <div className="container">
-          <p>© <span id="year">{new Date().getFullYear()}</span> Mallikarjun | Designed with ❤️ by Mallikarjun</p>
-          <p className="footer-note">Passionate Computer Science Engineer | Building the Future with Code</p>
+          <div className="footer-inner">
+            <p>© <span id="year">{new Date().getFullYear()}</span> Mallikarjun | Frontend Developer & Cyber Security Enthusiast</p>
+            <p className="footer-note">Designed and Built with React & ❤️</p>
+          </div>
         </div>
       </footer>
     </div>

@@ -239,10 +239,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .logo {
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.05em;
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .nav {
@@ -257,8 +259,8 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   padding-bottom: 4px;
   transition: color 0.3s ease;
-  font-weight: 600;
-  font-size: 1.4rem;
+  font-weight: 700;
+  font-size: 1.6rem;
 }
 
 .nav a::after {
@@ -336,6 +338,9 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   cursor: pointer;
   padding: 5px;
+  background: transparent;
+  border: none;
+  color: var(--text);
 }
 
 .mobile-menu-btn span {
@@ -344,6 +349,19 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--text);
   margin: 3px 0;
   transition: 0.3s;
+}
+
+/* Hamburger animation */
+.mobile-menu-btn.active span:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
 }
 
 /* Hero Section */
@@ -398,12 +416,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-text h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  line-height: 1.2;
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  line-height: 1.1;
   letter-spacing: -0.02em;
   margin: 0 0 1rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text);
+  text-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
 }
 
 .animated-text {
@@ -444,13 +463,38 @@ h1, h2, h3, h4, h5, h6 {
   51%, 100% { opacity: 0; }
 }
 
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.text-content {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: var(--accent);
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(233, 69, 96, 0.3);
+}
+
 .hero-subtitle {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: var(--text-soft);
   margin-bottom: 2rem;
   line-height: 1.7;
-  max-width: 600px;
+  max-width: 700px;
   text-align: center;
+  font-weight: 500;
 }
 
 @media (min-width: 768px) {
@@ -480,13 +524,15 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   border-radius: var(--radius-pill);
   border: none;
-  font-size: 1.2rem;
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
+  font-size: 1.4rem;
+  padding: 1rem 2rem;
+  font-weight: 700;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.3s ease;
   gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn.primary {
@@ -547,10 +593,11 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 280px;
-  height: 280px;
+  width: 350px;
+  height: 350px;
   margin: 0 auto;
   flex-shrink: 0;
+  animation: float 6s ease-in-out infinite;
 }
 
 .profile-img {
@@ -636,11 +683,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .section h2 {
   margin: 0 0 1rem;
-  font-size: 2.4rem;
-  font-weight: 700;
+  font-size: 3rem;
+  font-weight: 800;
   color: var(--text);
   position: relative;
   display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 15px rgba(233, 69, 96, 0.4);
 }
 
 .section h2::after {
@@ -702,11 +752,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .skill-group h3 {
   margin: 0 0 1rem;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   color: var(--text);
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  font-weight: 700;
 }
 
 .skill-group h3 i {
@@ -780,9 +831,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .project-card h3 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: var(--text);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .project-tag {
@@ -872,8 +923,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .education-content h3 {
   margin: 0 0 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: var(--text);
+  font-weight: 700;
 }
 
 .education-institution {
@@ -922,11 +974,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .achievement-category h3 {
   margin: 0 0 1.5rem;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: var(--text);
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  font-weight: 700;
 }
 
 .achievement-category h3 i {
@@ -964,9 +1017,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .achievement-item h4 {
   margin: 0 0 0.75rem;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   color: var(--text);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .achievement-item p {
@@ -1039,8 +1092,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .contact-form h3 {
   margin: 0 0 1.5rem;
-  font-size: 1.7rem;
+  font-size: 2rem;
   color: var(--text);
+  font-weight: 700;
 }
 
 .form-field {
@@ -1089,6 +1143,26 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1rem;
   color: var(--text-soft);
   text-align: center;
+}
+
+.form-status {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  font-weight: 500;
+}
+
+.form-status.success {
+  background: rgba(34, 197, 94, 0.2);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #4ade80;
+}
+
+.form-status.error {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #f87171;
 }
 
 /* Footer */
